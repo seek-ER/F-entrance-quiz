@@ -6,12 +6,7 @@ class App extends Component {
     super(props);
     this.state = {
       students: [],
-      team1: [],
-      team2: [],
-      team3: [],
-      team4: [],
-      team5: [],
-      team6: [],
+      teams: [],
     };
   }
 
@@ -21,7 +16,6 @@ class App extends Component {
     const data = await response.json();
     const map = new Map(Object.entries(data));
     const arr = [...map];
-    console.log(arr);
     this.setState({
       students: arr,
     });
@@ -31,12 +25,15 @@ class App extends Component {
     const URL = 'http://localhost:8080/grouping';
     const response = await fetch(URL);
     const data = await response.json();
+    let teams = [];
     data.map((students) => {
       const map = new Map(Object.entries(students));
       const arr = [...map];
-      console.log(arr);
+      teams.push(arr);
     });
-    console.log(data);
+    this.setState({
+      teams: teams,
+    });
   };
 
   render() {
@@ -46,6 +43,20 @@ class App extends Component {
           <div className="GroupingTab">
             <label>分组列表</label>
             <input type="button" value="分组学员" onClick={this.handleClick} />
+          </div>
+          <div className="TeamLists">
+            {this.state.teams.map((team, index) => (
+              <div className="List">
+                <div className="ListBar">{index + 1} 组</div>
+                <div key={index} className="Students">
+                  {team.map((student) => (
+                    <div key={student[0]} className="Student">
+                      {student[0]}.{student[1]}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <div className="StudentList">
