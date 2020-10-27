@@ -12,7 +12,9 @@ class App extends Component {
     };
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => this.getStudents();
+
+  getStudents = async () => {
     const URL = 'http://localhost:8080/students';
     const response = await fetch(URL);
     const data = await response.json();
@@ -49,6 +51,28 @@ class App extends Component {
     this.setState({
       inputStudent: e.target.value,
     });
+  };
+
+  handleSubmit = async () => {
+    await fetch('http://localhost:8080/student', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        inputStudent: this.state.inputStudent,
+      }),
+    }).then((response) => {
+      if (response.status === 201) {
+        alert('添加成功');
+      }
+    });
+    this.getStudents();
+    this.setState({
+      inputStudent: '',
+    });
+    this.handleInput();
   };
 
   render() {
