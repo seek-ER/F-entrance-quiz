@@ -45,7 +45,7 @@
           background-color: $light-gray;
           padding: 5px;
           margin: 8px;
-          width: 70px;
+          width: 68px;
           text-align: center;
         }
       }
@@ -63,6 +63,16 @@
         margin: 8px;
         width: 70px;
         text-align: center;
+      }
+
+      input {
+        background-color: $light-gray;
+        border: 0;
+        text-align: center;
+        padding: 5px;
+        margin: 8px;
+        width: 80px;
+        color: black;
       }
     }
   }

@@ -7,6 +7,8 @@ class App extends Component {
     this.state = {
       students: [],
       teams: [],
+      isInput: false,
+      inputStudent: '',
     };
   }
 
@@ -33,6 +35,19 @@ class App extends Component {
     });
     this.setState({
       teams: teams,
+    });
+  };
+
+  handleInput = () => {
+    this.setState({
+      isInput: !this.state.isInput,
+    });
+  };
+
+  handleChange = (e) => {
+    console.log(e.target.value);
+    this.setState({
+      inputStudent: e.target.value,
     });
   };
 
@@ -67,6 +82,17 @@ class App extends Component {
                 {student[0]}.{student[1]}
               </span>
             ))}
+            {!this.state.isInput && (
+              <input type="button" value="+添加学员" onClick={this.handleInput} />
+            )}
+            {this.state.isInput && (
+              <input
+                type="input"
+                value={this.state.inputStudent}
+                onChange={this.handleChange}
+                onKeyPress={this.handleSubmit}
+              />
+            )}
           </div>
         </div>
       </div>
