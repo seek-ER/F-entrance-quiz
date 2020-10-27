@@ -12,7 +12,14 @@ class App extends Component {
     };
   }
 
-  componentDidMount = () => this.getStudents();
+  componentDidMount = () => {
+    if (localStorage.getItem('teams') !== '[]') {
+      this.setState({
+        teams: JSON.parse(localStorage.getItem('teams')),
+      });
+    }
+    this.getStudents();
+  };
 
   getStudents = async () => {
     const URL = 'http://localhost:8080/students';
@@ -38,6 +45,7 @@ class App extends Component {
     this.setState({
       teams: teams,
     });
+    localStorage.setItem('teams', JSON.stringify(this.state.teams));
   };
 
   handleInput = () => {
