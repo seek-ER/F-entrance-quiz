@@ -24,12 +24,15 @@ class App extends Component {
   render() {
     return (
       <div data-testid="app" className="App">
-        hello
         <div className="StudentList">
-          <div>学员列表</div>
-          {this.state.students.map((student) => (
-            <div key={student[0]}>{student}</div>
-          ))}
+          <label>学员列表</label>
+          <div className="List">
+            {this.state.students.map((student) => (
+              <span key={student[0]} className="Student">
+                {student[0]}.{student[1]}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     );

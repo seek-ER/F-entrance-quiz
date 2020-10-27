@@ -3,4 +3,23 @@
 .App {
   margin: 0 20%;
   padding: 20px;
+
+  label {
+    font-size: large;
+    font-weight: 900;
+  }
+  .StudentList {
+    .List {
+      display: flex;
+      flex-wrap: wrap;
+
+      .Student {
+        background-color: $light-gray;
+        padding: 5px;
+        margin: 8px;
+        width: 70px;
+        text-align: center;
+      }
+    }
+  }
 }
