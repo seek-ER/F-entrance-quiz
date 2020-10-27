@@ -3,11 +3,27 @@
 .App {
   margin: 0 20%;
   padding: 20px;
+  background-color: $bg-gray;
 
   label {
     font-size: large;
     font-weight: 900;
   }
+
+  .GroupingList {
+    .GroupingTab {
+      margin: 20px 0;
+
+      input {
+        background-color: $primary-color;
+        border: 0;
+        float: right;
+        width: 100px;
+        height: 30px;
+      }
+    }
+  }
+
   .StudentList {
     .List {
       display: flex;

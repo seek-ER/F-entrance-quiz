@@ -24,6 +24,12 @@ class App extends Component {
   render() {
     return (
       <div data-testid="app" className="App">
+        <div className="GroupingList">
+          <div className="GroupingTab">
+            <label>分组列表</label>
+            <input type="button" value="分组学员" />
+          </div>
+        </div>
         <div className="StudentList">
           <label>学员列表</label>
           <div className="List">
