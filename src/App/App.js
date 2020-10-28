@@ -13,9 +13,9 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    if (localStorage.getItem('teams') !== '[]') {
+    if (sessionStorage.getItem('teams') !== null) {
       this.setState({
-        teams: JSON.parse(localStorage.getItem('teams')),
+        teams: JSON.parse(sessionStorage.getItem('teams')),
       });
     }
     this.getStudents();
@@ -45,7 +45,7 @@ class App extends Component {
     this.setState({
       teams: teams,
     });
-    localStorage.setItem('teams', JSON.stringify(this.state.teams));
+    sessionStorage.setItem('teams', JSON.stringify(this.state.teams));
   };
 
   handleInput = () => {
@@ -55,13 +55,15 @@ class App extends Component {
   };
 
   handleChange = (e) => {
-    console.log(e.target.value);
     this.setState({
       inputStudent: e.target.value,
     });
   };
 
-  handleSubmit = async () => {
+  handleSubmit = async (e) => {
+    if (e.keyCode !== 13) {
+      return;
+    }
     await fetch('http://localhost:8080/student', {
       method: 'POST',
       headers: {
@@ -93,7 +95,7 @@ class App extends Component {
           </div>
           <div className="TeamLists">
             {this.state.teams.map((team, index) => (
-              <div className="List">
+              <div className="List" key={index}>
                 <div className="ListBar">{index + 1} 组</div>
                 <div key={index} className="Students">
                   {team.map((student) => (
@@ -122,7 +124,7 @@ class App extends Component {
                 type="input"
                 value={this.state.inputStudent}
                 onChange={this.handleChange}
-                onKeyPress={this.handleSubmit}
+                onKeyDown={this.handleSubmit}
               />
             )}
           </div>
