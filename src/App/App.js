@@ -8,10 +8,12 @@ class App extends Component {
       students: [],
       teams: [],
       isInput: false,
+      // TODO GTB-知识点: - inputStudent不需要存储到state
       inputStudent: '',
     };
   }
 
+  // TODO GTB-知识点: - 这样写通常情况下是没有问题的，但是在引入某些React库时可能会有问题，详细见https://github.com/keajs/kea-saga/issues/2
   componentDidMount = () => {
     if (sessionStorage.getItem('teams') !== null) {
       this.setState({
@@ -25,6 +27,7 @@ class App extends Component {
     const URL = 'http://localhost:8080/students';
     const response = await fetch(URL);
     const data = await response.json();
+    // TODO GTB-知识点: - 数据结构设计的有点复杂，为什么不直接返回students 数组呢？
     const map = new Map(Object.entries(data));
     const arr = [...map];
     this.setState({
@@ -87,10 +90,14 @@ class App extends Component {
 
   render() {
     return (
+      // TODO GTB-知识点: - div嵌套过深
+      // TODO GTB-知识点: - 没有使用语义标签
       <div data-testid="app" className="App">
+        {/*TODO GTB-工程实践: - class命名不符合规范，不建议用驼峰*/}
         <div className="GroupingList">
           <div className="GroupingTab">
             <label>分组列表</label>
+            {/*TODO GTB-知识点: - 直接用button*/}
             <input type="button" value="分组学员" onClick={this.handleClick} />
           </div>
           <div className="TeamLists">
